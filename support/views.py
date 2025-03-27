@@ -10,6 +10,6 @@ def support_dashboard(request):
         service_request = ServiceRequest.objects.get(id=req_id)
         service_request.status = new_status
         service_request.save()
-        return redirect('support_dashboard')
+        return redirect('support:dashboard')  # Fixed redirect
 
     return render(request, 'support/dashboard.html', {'requests': requests})

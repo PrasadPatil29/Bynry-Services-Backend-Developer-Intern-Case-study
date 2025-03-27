@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customers',
-    'support',
+    'customers.apps.CustomersConfig',
+    'support.apps.SupportConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,11 @@ ROOT_URLCONF = 'gas_utility.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'customers/templates'],   # Add the path here
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'customers' / 'templates',
+            BASE_DIR / 'support' / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

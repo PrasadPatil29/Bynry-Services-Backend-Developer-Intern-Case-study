@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Support Dashboard</title>
+</head>
+<body>
+    <h1>Support Dashboard</h1>
+    {% for request in requests %}
+    <div>
+        <h3>Request #{{ request.id }}</h3>
+        <p>Service Type: {{ request.service_type }}</p>
+        <p>Status: {{ request.status }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="req_id" value="{{ request.id }}">
+            <select name="status">
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <button type="submit">Update Status</button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+</html>

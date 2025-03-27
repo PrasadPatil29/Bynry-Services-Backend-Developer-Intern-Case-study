@@ -14,13 +14,24 @@ def dashboard(request):
         messages.warning(request, "Customer profile not found. Please create your profile.")
         return redirect('create_customer_profile')
 
-    service_requests = ServiceRequest.objects.filter(customer=customer)
+    # Get fresh data from database
+    requests = ServiceRequest.objects.filter(customer=customer).select_related('customer')
+    
+    # Count by status
+    pending_count = requests.filter(status='pending').count()
+    resolved_count = requests.filter(status__in=['resolved', 'completed']).count()
+    in_progress_count = requests.filter(status='in_progress').count()
+    total_count = requests.count()
 
     context = {
         'customer': customer,
-        'requests': service_requests
+        'requests': requests.order_by('-updated_at'),  # Show most recently updated first
+        'total_count': total_count,
+        'pending_count': pending_count,
+        'resolved_count': resolved_count,
+        'in_progress_count': in_progress_count,
     }
-    return render(request, 'customers/dashboard.html', context)
+    return render(request, 'dashboard.html', context)
 
 
 # ✅ Create Service Request View
@@ -31,7 +42,7 @@ def create_request(request):
         customer = Customer.objects.get(user=request.user)
     except Customer.DoesNotExist:
         messages.warning(request, "Customer profile not found. Please create your profile.")
-        return redirect('create_customer_profile')
+        return redirect('customers:create_customer_profile')
 
     if request.method == 'POST':
         service_type = request.POST.get('service_type')
@@ -43,9 +54,9 @@ def create_request(request):
             details=details
         )
         messages.success(request, "Service request created successfully!")
-        return redirect('dashboard')
+        return redirect('customers:dashboard')
 
-    return render(request, 'customers/create_request.html')
+    return render(request, 'create_request.html')
 
 
 from django.shortcuts import render, redirect
@@ -67,4 +78,4 @@ def create_customer_profile(request):
         messages.success(request, "Profile created successfully!")
         return redirect('dashboard')
 
-    return render(request, 'customers/create_customer_profile.html')
+    return render(request, 'create_customer_profile.html')

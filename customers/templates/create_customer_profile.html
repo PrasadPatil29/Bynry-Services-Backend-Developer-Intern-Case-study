@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Customer Profile</title>
+</head>
+<body>
+    <h1>Create Your Profile</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>Phone:</label>
+            <input type="text" name="phone" required>
+        </div>
+        <div>
+            <label>Address:</label>
+            <textarea name="address" required></textarea>
+        </div>
+        <button type="submit">Create Profile</button>
+    </form>
+</body>
+</html>
