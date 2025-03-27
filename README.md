@@ -75,6 +75,4 @@ The **Bynry Services Backend** is designed to manage customer service requests f
 ---
 
 ## 📌 **Contributors**
-- **Prasad Patil** – Backend Developer Intern
-
----
+- **Prasad Patil** 
