@@ -53,9 +53,7 @@ The **Bynry Services Backend** is designed to manage customer service requests f
 
 ## 🔥 **Features**
 - 📌 Customer request submission and tracking.  
-- 📌 Support team request management.  
-- 📌 User authentication and role-based access.  
-- 📌 Responsive dashboards with request statistics.  
+- 📌 Support team request management. 
 
 ---
 
