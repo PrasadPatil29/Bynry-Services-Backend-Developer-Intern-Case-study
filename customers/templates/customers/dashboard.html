@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Welcome, {{ customer.user.username }}</h2>
+<p>Phone: {{ customer.phone }}</p>
+<p>Address: {{ customer.address }}</p>
+
+<h3>Your Service Requests</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Service Type</th>
+            <th>Details</th>
+            <th>Status</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in requests %}
+        <tr>
+            <td>{{ req.service_type }}</td>
+            <td>{{ req.details }}</td>
+            <td>{{ req.status }}</td>
+            <td>{{ req.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No service requests found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'create_request' %}">Submit New Request</a>
+{% endblock %}

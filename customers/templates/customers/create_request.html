@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Submit a New Service Request</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <label>Service Type:</label>
+    <input type="text" name="service_type" required>
+
+    <label>Details:</label>
+    <textarea name="details" required></textarea>
+
+    <button type="submit">Submit Request</button>
+</form>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

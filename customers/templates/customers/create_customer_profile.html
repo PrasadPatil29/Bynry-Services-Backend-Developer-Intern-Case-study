@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Create Your Customer Profile</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <label>Phone:</label>
+    <input type="text" name="phone" required>
+
+    <label>Address:</label>
+    <textarea name="address" required></textarea>
+
+    <button type="submit">Create Profile</button>
+</form>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}
